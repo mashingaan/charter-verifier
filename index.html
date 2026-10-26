@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Charter attestation verifier</title>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
+<main>
+<h1>Charter attestation verifier</h1>
+<p>Compare exact IPFS bytes with the SHA256 digests in an EAS attestation. No wallet connection.</p>
+<form id="verify-form">
+<label for="network">Network</label>
+<select id="network"><option value="base">Base</option><option value="base-sepolia">Base Sepolia</option></select>
+<label for="uid">Attestation UID</label>
+<input id="uid" required pattern="0x[0-9a-fA-F]{64}" placeholder="0x followed by 64 hex characters" spellcheck="false">
+<label for="rpc">Read-only RPC URL</label>
+<input id="rpc" type="url" required value="https://mainnet.base.org">
+<label for="gateway">IPFS gateway prefix</label>
+<input id="gateway" type="url" required value="https://ipfs.io/ipfs/">
+<button id="verify" type="submit">Verify exact bytes</button>
+</form>
+<p id="status" role="status" aria-live="polite">Enter a UID to begin. Official Sepolia rehearsal verification is pending publication of its UID.</p>
+<section id="result" aria-label="Verification result"></section>
+<p>A match proves byte equality with the supplied attestation. It does not endorse its attester or prove this is Kognai's official Charter.</p>
+</main>
+</html>

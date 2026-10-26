@@ -1,0 +1,33 @@
+:root { color-scheme: light dark }
+body { font-family: system-ui, sans-serif }
+body { margin: 0 }
+main { max-width: 48rem }
+main { margin: auto }
+main { padding: 1rem }
+* { box-sizing: border-box }
+label { display: block }
+label { margin-top: 1rem }
+input, select, button { width: 100% }
+input, select, button { padding: 0.7rem }
+input, select, button { font: inherit }
+input, select, button { min-width: 0 }
+button { margin-top: 1.2rem }
+button { cursor: pointer }
+button:disabled { cursor: wait }
+:focus-visible { outline: 3px solid #6979df }
+article { border: 1px solid GrayText }
+article { border-radius: 0.5rem }
+article { padding: 1rem }
+article { margin: 1rem 0 }
+code, p, dd { overflow-wrap: anywhere }
+dd { margin-left: 0 }
+dt { font-weight: 600 }
+dl { margin-bottom: 0 }
+@media (prefers-color-scheme: light) {
+ body { background: #fcfcfa }
+ body { color: #19232c }
+}
+@media (prefers-color-scheme: dark) {
+ body { background: #161c23 }
+ body { color: #eef2f5 }
+}
