@@ -1,6 +1,7 @@
 import base64
 import functools
 import json
+import os
 import pathlib
 import threading
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
@@ -16,7 +17,8 @@ out = root / 'test-results'
 out.mkdir(exist_ok=True)
 try:
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        channel = os.environ.get('CHARTER_BROWSER_CHANNEL')
+        browser = p.chromium.launch(headless=True, **({'channel': channel} if channel else {}))
         try:
             for theme in ['light', 'dark']:
                 page = browser.new_page(viewport={'width': 360, 'height': 800}, color_scheme=theme)
