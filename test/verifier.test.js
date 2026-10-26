@@ -100,3 +100,24 @@ test('IPFS adapter fetches raw bytes and blocks path or URL injection',async()=>
  assert.equal(target,'https://example.com/ipfs/cid1')
  for(const cid of ['../secret','https://evil.example','cid/path']) await assert.rejects(ipfs(cid))
 })
+
+test('A4 forged Uint8Array tags cannot prove an empty text',async()=>{
+ const forged={length:0,[Symbol.toStringTag]:'Uint8Array'}
+ const one={...data,names:['empty'],digests:[data.digests[1]],cids:['empty']}
+ const r=await run({rpc:async()=>encodeAttestation({data:encodeData(one)}),ipfs:async()=>forged})
+ assert.equal(r.ok,false)
+ assert.ok(r.texts[0].error)
+})
+test('A2 typed byte subviews and cross-realm bytes hash only their own contents',async()=>{
+ const {runInNewContext}=await import('node:vm')
+ for(const crossRealm of [false,true]) {
+  const r=await run({ipfs:async cid=>{
+   const original=bytes[data.cids.indexOf(cid)]
+   if(crossRealm) return runInNewContext('new Uint8Array('+JSON.stringify([...original])+')')
+   const padded=new Uint8Array(original.length+4)
+   padded.set(original,2)
+   return padded.subarray(2,2+original.length)
+  }})
+  assert.equal(r.ok,true)
+ }
+})

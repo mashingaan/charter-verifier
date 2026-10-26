@@ -30,7 +30,7 @@ export async function verifyCharter({uid,network,rpc,ipfs,timeoutMs=15000}={}) {
    const row={name,cid,expected,actual:null,match:false}
    try {
     const bytes=await deadline(()=>ipfs(cid),timeoutMs)
-    if(Object.prototype.toString.call(bytes)!=='[object Uint8Array]') throw new Error('Expected bytes')
+    if(!ArrayBuffer.isView(bytes)||Object.prototype.toString.call(bytes)!=='[object Uint8Array]') throw new Error('Expected bytes')
     const digest=await globalThis.crypto.subtle.digest('SHA-256',new Uint8Array(bytes))
     const actual='0x'+Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('')
     return {...row,actual,match:actual===expected}

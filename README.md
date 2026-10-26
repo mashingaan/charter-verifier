@@ -21,7 +21,7 @@ The example zero UID is deliberately missing, NOT a rehearsal UID. Supply an act
 
 A1 ABI round trip, Unicode and malformed data. A2 all matching bytes. A3 single-text tampering. A4 missing/revoked/RPC/fetch errors without throws. A5 both chain configurations and independently decoded getAttestation calldata. A6 mobile page, real browser form/results/error recovery and screenshots. **A6 real Kognai Sepolia rehearsal verification is PENDING**: no official UID was in the retrieved live bundle and no rehearsal result is invented. The dedicated live test is skipped unless CHARTER_REHEARSAL_UID and CHARTER_REHEARSAL_SOURCE are supplied. A real read-only verification and source-linked README result remain necessary after that UID is available.
 
-Six targeted mutations cover revocation, any-text instead of all-text success, digest comparison, wrong byte hashing, wrong UID and empty-text success. Hidden tests are not known or claimed to pass.
+Seven targeted mutations cover revocation, any-text instead of all-text success, digest comparison, wrong byte hashing, wrong UID, empty-text success and forged byte-array tags. Real ArrayBuffer views are required, with subviews and cross-realm Uint8Array values tested separately. Hidden tests are not known or claimed to pass.
 
 ## Assumptions isolated for PACT
 
